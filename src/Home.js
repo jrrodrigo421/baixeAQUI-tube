@@ -139,7 +139,7 @@ function Home() {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-slate-700 to-indigo-900 p-4 pb-56">
       <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md transform transition duration-500 hover:scale-105">
         <h2 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">
-          DownTUBE
+          BaixeAQUI
         </h2>
         <label className="block mb-2 text-gray-700 font-semibold">
           Link do vídeo:
