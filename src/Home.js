@@ -113,7 +113,8 @@ function Home() {
     setResponse("");
     try {
       const res = await axios.post(
-        "http://127.0.0.1:5000/api/download",
+        // "http://127.0.0.1:5000/api/download",
+        " https://4da0-138-94-55-46.ngrok-free.app/api/download",
         { video_url: message }, // Enviando o link como JSON
         { headers: { "Content-Type": "application/json" } } // Definindo o Content-Type correto
       );
