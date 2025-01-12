@@ -4,6 +4,7 @@ import { FaYoutube } from "react-icons/fa";
 
 function Home() {
   const [message, setMessage] = useState(""); // Guarda o link do vídeo
+  const [type, setType] = useState("video"); // Tipo de download ("video" ou "audio")
   const [response, setResponse] = useState(""); // Mensagem de resposta do backend
   const [isLoading, setIsLoading] = useState(false); // Indica se o envio está em andamento
 
@@ -18,14 +19,19 @@ function Home() {
     try {
       const res = await axios.post(
         "https://4da0-138-94-55-46.ngrok-free.app/api/download",
-        { video_url: message }, // Enviando o link como JSON
+        { video_url: message, type }, // Enviando o link e o tipo (áudio ou vídeo)
         { headers: { "Content-Type": "application/json" } } // Definindo o Content-Type correto
       );
 
-      if (res.data.drive_link) {
+      if (type === "audio" && res.data.audio_drive_link) {
         setResponse(
-          `Download disponível no Google Drive: ` +
-          `<a href="${res.data.drive_link}" target="_blank" class="text-blue-500 underline">Clique aqui</a>`
+          `Áudio disponível no Google Drive: ` +
+          `<a href="${res.data.audio_drive_link}" target="_blank" class="text-blue-500 underline">Clique aqui</a>`
+        );
+      } else if (type === "video" && res.data.video_drive_link) {
+        setResponse(
+          `Vídeo disponível no Google Drive: ` +
+          `<a href="${res.data.video_drive_link}" target="_blank" class="text-blue-500 underline">Clique aqui</a>`
         );
       } else {
         setResponse("Erro ao obter o link de download. Tente novamente.");
@@ -42,7 +48,6 @@ function Home() {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 to-gray-800 p-4 pb-48">
       <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-md transition duration-500 transform hover:scale-105 hover:shadow-[0px_0px_15px_5px_rgba(255,0,0,0.5)]">
         <div className="text-center">
-          {/* Ícone do YouTube com animação descendo */}
           <FaYoutube className="text-red-600 text-6xl mx-auto mb-4 animate-slide-down" />
           <div className="flex justify-center items-center">
             <h2 className="text-4xl font-bold text-gray-900 mb-6 animate-slide-left">
@@ -64,6 +69,23 @@ function Home() {
           placeholder="https://www.youtube.com/watch?v=EXAMPLE"
           className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:outline-none resize-none"
         ></textarea>
+
+        <div className="mt-4 flex justify-around">
+          <button
+            className={`px-4 py-2 rounded-lg font-bold transition-all ${type === "video" ? "bg-red-600 text-white" : "bg-gray-300 text-gray-800"
+              }`}
+            onClick={() => setType("video")}
+          >
+            Vídeo
+          </button>
+          <button
+            className={`px-4 py-2 rounded-lg font-bold transition-all ${type === "audio" ? "bg-red-600 text-white" : "bg-gray-300 text-gray-800"
+              }`}
+            onClick={() => setType("audio")}
+          >
+            Áudio
+          </button>
+        </div>
 
         <button
           onClick={sendMessage}
@@ -101,7 +123,7 @@ function Home() {
 
         {response && (
           <div
-            className={`mt-4 text-center font-medium transition-opacity duration-500 ${response.includes("Download disponível") ? "text-green-600" : "text-red-500"
+            className={`mt-4 text-center font-medium transition-opacity duration-500 ${response.includes("disponível") ? "text-green-600" : "text-red-500"
               }`}
             dangerouslySetInnerHTML={{ __html: response }}
           ></div>
