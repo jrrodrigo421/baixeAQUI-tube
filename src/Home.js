@@ -20,7 +20,7 @@ function Home() {
     try {
       // Realiza a requisição para o backend
       const res = await axios.post(
-        "https://4da0-138-94-55-46.ngrok-free.app/api/download",
+        "https://relative-trademarks-ethernet-pacific.trycloudflare.com/api/download",
         { video_url: message, type }, // Enviando o link e o tipo (áudio ou vídeo)
         {
           headers: { "Content-Type": "application/json" },
