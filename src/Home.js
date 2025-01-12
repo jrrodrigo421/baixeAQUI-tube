@@ -16,28 +16,33 @@ function Home() {
 
     setIsLoading(true);
     setResponse("");
+
     try {
+      // Realiza a requisição para o backend
       const res = await axios.post(
         "https://4da0-138-94-55-46.ngrok-free.app/api/download",
         { video_url: message, type }, // Enviando o link e o tipo (áudio ou vídeo)
-        { headers: { "Content-Type": "application/json" } } // Definindo o Content-Type correto
+        {
+          headers: { "Content-Type": "application/json" },
+          responseType: "blob", // Para receber um arquivo binário (blob)
+        }
       );
 
-      if (type === "audio" && res.data.audio_drive_link) {
-        setResponse(
-          `Áudio disponível no Google Drive: ` +
-          `<a href="${res.data.audio_drive_link}" target="_blank" class="text-blue-500 underline">Clique aqui</a>`
-        );
-      } else if (type === "video" && res.data.video_drive_link) {
-        setResponse(
-          `Vídeo disponível no Google Drive: ` +
-          `<a href="${res.data.video_drive_link}" target="_blank" class="text-blue-500 underline">Clique aqui</a>`
-        );
-      } else {
-        setResponse("Erro ao obter o link de download. Tente novamente.");
-      }
+      // Criação do link de download no navegador
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute(
+        "download",
+        type === "audio" ? "audio.mp3" : "video.mp4" // Nome do arquivo baixado
+      );
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setResponse("Download concluído com sucesso!");
     } catch (error) {
-      setResponse("Erro ao enviar o link. Verifique a URL e tente novamente.");
+      setResponse("Erro ao baixar o arquivo. Tente novamente.");
     } finally {
       setIsLoading(false);
       setMessage("");
@@ -123,10 +128,11 @@ function Home() {
 
         {response && (
           <div
-            className={`mt-4 text-center font-medium transition-opacity duration-500 ${response.includes("disponível") ? "text-green-600" : "text-red-500"
+            className={`mt-4 text-center font-medium transition-opacity duration-500 ${response.includes("concluído") ? "text-green-600" : "text-red-500"
               }`}
-            dangerouslySetInnerHTML={{ __html: response }}
-          ></div>
+          >
+            {response}
+          </div>
         )}
       </div>
 
