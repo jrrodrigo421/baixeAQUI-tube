@@ -77,7 +77,7 @@ function Home() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 to-gray-800 p-4 pb-48">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 to-gray-800 p-4">
       <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-md transition duration-500 transform hover:scale-105 hover:shadow-[0px_0px_15px_5px_rgba(255,0,0,0.5)]">
         <div className="text-center">
           <FaYoutube className="text-red-600 text-6xl mx-auto mb-4 animate-slide-down" />
