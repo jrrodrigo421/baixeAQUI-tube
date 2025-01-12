@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaYoutube } from "react-icons/fa";
 import BannerDescription from "./BannerDescription"; // Importando o novo componente
+import PromotionBanner from "./PromotionBanner"; // Importando o banner da promoção
+
 
 
 function Home() {
@@ -85,7 +87,11 @@ function Home() {
             <h2 className="text-4xl font-bold text-gray-900 mb-6 animate-slide-left">Baixe</h2>
             <h2 className="text-4xl font-bold text-red-600 mb-6 animate-slide-right">AQUI</h2>
           </div>
-          <BannerDescription />
+          <div className="relative">
+            <PromotionBanner />
+            <BannerDescription />
+          </div>
+
           <br />
         </div>
 
