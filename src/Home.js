@@ -89,7 +89,7 @@ function Home() {
           </div>
           <div className="relative">
             <PromotionBanner />
-            <BannerDescription />
+            <BannerDescription isGrayMode={true} />
           </div>
 
           <br />
