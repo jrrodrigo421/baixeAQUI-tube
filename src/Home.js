@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FaYoutube } from "react-icons/fa";
 
 function Home() {
   const [message, setMessage] = useState(""); // Guarda o link do vídeo
@@ -38,25 +39,35 @@ function Home() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-slate-700 to-indigo-900 p-4 pb-56">
-      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md transform transition duration-500 hover:scale-105">
-        <h2 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">
-          BaixeAQUI
-        </h2>
-        <label className="block mb-2 text-gray-700 font-semibold">
-          Link do vídeo:
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 to-gray-800 p-4">
+      <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-md transition duration-500 transform hover:scale-105 hover:shadow-[0px_0px_15px_5px_rgba(255,0,0,0.5)]">
+        <div className="text-center">
+          {/* Ícone do YouTube com animação descendo */}
+          <FaYoutube className="text-red-600 text-6xl mx-auto mb-4 animate-slide-down" />
+          <div className="flex justify-center items-center">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6 animate-slide-left">
+              Baixe
+            </h2>
+            <h2 className="text-4xl font-bold text-red-600 mb-6 animate-slide-right">
+              AQUI
+            </h2>
+          </div>
+        </div>
+
+        <label className="block mb-2 text-gray-800 font-semibold">
+          Insira o link do vídeo:
         </label>
         <textarea
-          rows="4"
+          rows="3"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Digite o link"
-          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
+          placeholder="https://www.youtube.com/watch?v=EXAMPLE"
+          className="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:ring-2 focus:ring-red-600 focus:outline-none resize-none"
         ></textarea>
 
         <button
           onClick={sendMessage}
-          className="w-full bg-gradient-to-r from-indigo-600 to-purple-700 hover:from-indigo-700 hover:to-purple-800 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 mt-4 flex items-center justify-center"
+          className="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 mt-6 flex items-center justify-center hover:bg-red-700 hover:shadow-lg animate-slide-up"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -81,7 +92,7 @@ function Home() {
                   d="M4 12a8 8 0 018-8v8H4z"
                 ></path>
               </svg>
-              Enviando...
+              Processando...
             </>
           ) : (
             "Download"
@@ -96,6 +107,68 @@ function Home() {
           ></div>
         )}
       </div>
+
+      <style jsx global>{`
+        @keyframes slide-down {
+          0% {
+            transform: translateY(-100px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-left {
+          0% {
+            transform: translateX(-100px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-right {
+          0% {
+            transform: translateX(100px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-up {
+          0% {
+            transform: translateY(100px);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        .animate-slide-down {
+          animation: slide-down 2s ease-in-out;
+        }
+
+        .animate-slide-left {
+          animation: slide-left 2s ease-in-out;
+        }
+
+        .animate-slide-right {
+          animation: slide-right 2s ease-in-out;
+        }
+
+        .animate-slide-up {
+          animation: slide-up 2s ease-in-out;
+        }
+      `}</style>
     </div>
   );
 }
