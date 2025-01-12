@@ -20,7 +20,8 @@ function Home() {
     try {
       // Realiza a requisição para o backend
       const res = await axios.post(
-        "https://relative-trademarks-ethernet-pacific.trycloudflare.com/api/download",
+        // "https://relative-trademarks-ethernet-pacific.trycloudflare.com/api/download",
+        "https://myers-batman-beam-split.trycloudflare.com/api/download",
         { video_url: message, type }, // Enviando o link e o tipo (áudio ou vídeo)
         {
           headers: { "Content-Type": "application/json" },
