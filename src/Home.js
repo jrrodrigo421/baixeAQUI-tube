@@ -3,8 +3,6 @@ import { FaYoutube } from "react-icons/fa";
 import BannerDescription from "./BannerDescription"; // Importando o novo componente
 import PromotionBanner from "./PromotionBanner"; // Importando o banner da promoção
 
-
-
 function Home() {
   const [message, setMessage] = useState(""); // Guarda o link do vídeo
   const [type, setType] = useState("video"); // Tipo de download ("video" ou "audio")
