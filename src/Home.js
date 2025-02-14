@@ -22,7 +22,7 @@ function Home() {
 
     try {
       const xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://operational-making-yeah-cables.trycloudflare.com/api/download", true);
+      xhr.open("POST", "https://saddam-feel-andale-market.trycloudflare.com/api/download", true);
       xhr.responseType = "blob";
 
       xhr.setRequestHeader("Content-Type", "application/json");
